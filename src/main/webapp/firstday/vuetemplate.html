@@ -7,9 +7,13 @@
 </head>
 <body>
     <div id="app">
-        <div >没使用模板语法:-------------------{{msg}}</div>
+        <!--使用插值表达式会在加载数据完成前显示{{msg}}-->
+        <div >没使用v-html:{{msg}}</div>
         <!--使用v-html来绑定带有html标签的值-->
-       使用模板语法:---------------------<div v-html="msg"></div>
+        使用v-html:<div v-html="msg"></div>
+        <!--使用v-text来绑定数据-->
+        <!--v-text将数据解析为纯文本，不能输出真正的html，与花括号的区别是在页面加载时不显示{{}}-->
+        v-text:<div v-text="msg"></div>
     </div>
     <script>
         var vue = new Vue({
