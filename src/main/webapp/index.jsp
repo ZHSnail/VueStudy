@@ -11,5 +11,7 @@
 <a href="firstday/setclass.html">vue设置样式学习</a><br/>
 <a href="firstday/v-for.html">v-for学习</a><br/>
 <a href="firstday/v-forusekey.html">v-for,key的注意点学习</a><br/>
+<a href="firstday/v-ifandv-show.html">v-if,v-show的学习</a><br/>
+<a href="firstday/banddemo.html">品牌案例的学习</a><br/>
 </body>
 </html>
