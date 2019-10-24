@@ -13,5 +13,6 @@
 <a href="firstday/v-forusekey.html">v-for,key的注意点学习</a><br/>
 <a href="firstday/v-ifandv-show.html">v-if,v-show的学习</a><br/>
 <a href="firstday/banddemo.html">品牌案例的学习</a><br/>
+<a href="firstday/v-filter.html">vue中全局过滤器的基本使用</a><br/>
 </body>
 </html>
