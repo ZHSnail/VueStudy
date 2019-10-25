@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中定义过滤时间格式的过滤器</title>
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加品牌</h3>
+        </div>
+        <div class="panel-body form-inline">
+            <label>
+                Id:
+                <input type="text" class="form-control" v-model="id">
+            </label>
+            <label>
+                Name:
+                <input type="text" class="form-control" v-model="name">
+            </label>
+            <input type="button" value="添加" @click="add()">
+            <input type="text" class="form-control" v-model="keyword">
+        </div>
+    </div>
+    <table class="table table-bordered table-hover table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Ctime</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--  根据输入的值来实现数组的过滤      -->
+            <!-- 在search方法中，执行for循环，生成带有关键字的list，并返回           -->
+            <tr v-for="item in search(keyword)" :key="item.id">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.ctime | dateFormat}}</td>
+                <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <script type="text/javascript">
+        //格式化时间的全局过滤器
+        Vue.filter('dateFormat',function (datestr) {
+           //得到要格式化的时间
+            var dt = new Date(datestr);
+            //yyyy-MM-dd
+            var y = dt.getFullYear();
+            //从0开始的
+            var m = dt.getMonth()+1;
+            var d = dt.getDate();
+//            return y+'-'+m+'-'+d;
+            //模板字符串 使用反引号 ``
+            return `${y}-${m}-${d}`
+        })
+        var app = new Vue({
+
+            el:'#app',
+            data:{
+                id:'',
+                name:'',
+                keyword:'',
+                list:[
+                    {id:1,name:'奔驰',ctime:new Date() },
+                    {id:2,name:'宝马',ctime:new Date() },
+                    // {id:2,name:'宝马',ctime:new Date() },
+                    // {id:2,name:'宝马',ctime:new Date() },
+                ]
+            },
+            methods:{
+                add:function () {
+                    this.list.push({id:this.id,name:this.name,ctime:new Date()});
+                    this.id='';
+                    this.name='';
+                },
+                del:function (id) {
+                    var index;
+                    for(var i = 0;i<=this.list.length;i++){
+                        if(id == this.list[i].id){
+                            index = i;
+                            break;
+                        }
+                    }
+                    this.list.splice(index,1);
+                },
+                search:function (keyword) {
+                    var newList=[];
+                    //es6中，对字符串提供了一个新方法，includes(),包含则返回true
+                    this.list.forEach(item => {
+                        if(item.name.indexOf(keyword) != -1){
+                            newList.push(item);
+                        }
+                    });
+                    return newList;
+                }
+            }
+            });
+    </script>
+</body>
+</html>

@@ -14,5 +14,7 @@
 <a href="firstday/v-ifandv-show.html">v-if,v-show的学习</a><br/>
 <a href="firstday/banddemo.html">品牌案例的学习</a><br/>
 <a href="firstday/v-filter.html">vue中全局过滤器的基本使用</a><br/>
+<a href="firstday/v-filter2.html">vue中定义过滤时间格式的过滤器</a><br/>
+<a href="firstday/privatev-filter.html">vue中定义私有的过滤器</a><br/>
 </body>
 </html>

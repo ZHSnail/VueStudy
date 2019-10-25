@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中定义私有的过滤器</title>
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../lib/bootstrap.min.css">
+</head>
+<body>
+<div id="app">
+    {{msg | dateFormat}}
+</div>
+<div id="app2">
+    {{msg | dateFormat}}
+</div>
+    <script type="text/javascript">
+        //格式化时间的全局过滤器 所有的vue实例都能使用
+        Vue.filter('dateFormat',function (datestr) {
+            //得到要格式化的时间
+            var dt = new Date(datestr);
+            //yyyy-MM-dd
+            var y = dt.getFullYear();
+            //从0开始的
+            var m = dt.getMonth()+1;
+            var d = dt.getDate();
+//            return y+'-'+m+'-'+d;
+            //模板字符串 使用反引号 ``
+            return `${y}-${m}-${d}`
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                msg:new Date(),
+            },
+            methods:{
+            },
+
+            });
+        var app2 = new Vue({
+            el:'#app2',
+            data:{
+                msg:new Date(),
+            },
+            methods:{
+            },
+            //私有的过滤器:
+            filters:{
+                //可以看到过滤器调用有就近原则,优先调用自己的同名过滤器
+                //有两个条件,过滤器名称和处理函数
+                dateFormat:function (datestr) {
+                    //得到要格式化的时间
+                    var dt = new Date(datestr);
+                    //yyyy-MM-dd
+                    var y = dt.getFullYear();
+                    //从0开始的
+                    var m = dt.getMonth()+1;
+                    var d = dt.getDate();
+                    var hh = dt.getHours();
+//            return y+'-'+m+'-'+d;
+                    //模板字符串 使用反引号 ``
+                    return `${y}-${m}-${d} ${hh}`
+                }
+            }
+        });
+    </script>
+</body>
+</html>
